@@ -19,5 +19,5 @@ dev_dependencies:
   flutter_lints: ^2.0.0
 
 flutter:
-  uses-material-design: true
+  uses-material-design: true  # 默认字体图标
   # assets:

@@ -79,6 +79,73 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               child: const Text("Container"),
             ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) {
+                    return ClipTestRoute();
+                  }),
+                );
+              },
+              child: const Text("Clip"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ClipTestRoute extends StatelessWidget {
+  const ClipTestRoute({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    Widget avatar = Image.network(
+        "https://wx1.sinaimg.cn/mw2000/0083xpcVly1ggvvkllmulj30it0qa0v5.jpg",
+        width: 60.0);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Transform"),
+      ),
+      body: Center(
+        child: Column(
+          children: <Widget>[
+            avatar, //不剪裁
+            ClipOval(child: avatar), //剪裁为圆形
+            ClipRRect(
+              //剪裁为圆角矩形
+              borderRadius: BorderRadius.circular(5.0),
+              child: avatar,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Align(
+                  alignment: Alignment.topLeft,
+                  widthFactor: .5, //宽度设为原来宽度一半，另一半会溢出
+                  child: avatar,
+                ),
+                Text(
+                  "你好世界",
+                  style: TextStyle(color: Colors.green),
+                )
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                ClipRect(
+                  //将溢出部分剪裁
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    widthFactor: .5, //宽度设为原来宽度一半
+                    child: avatar,
+                  ),
+                ),
+                Text("你好世界", style: TextStyle(color: Colors.green))
+              ],
+            ),
           ],
         ),
       ),
